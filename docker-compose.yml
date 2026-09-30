@@ -1,0 +1,19 @@
+# Local development infrastructure only — NOT a production deployment topology.
+# See ROADMAP.md / HLD section 10 for the actual containerized multi-AZ deployment.
+version: "3.9"
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: political_ops
+      POSTGRES_USER: political_ops
+      POSTGRES_PASSWORD: changeme
+    ports: ["5432:5432"]
+    volumes: ["pg-data:/var/lib/postgresql/data"]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+volumes:
+  pg-data:
